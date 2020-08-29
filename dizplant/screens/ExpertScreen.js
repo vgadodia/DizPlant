@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   Linking,
+  ScrollView,
 } from "react-native";
 import WelcomeSvg from "../components/WelcomeSvg";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -19,10 +20,10 @@ import {
 } from "@tensorflow/tfjs-react-native";
 
 function ExpertScreen({ navigation }) {
-  const name = "Veer Gadodia";
+  const name = "Sue Bottino";
   const image =
     "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRkKTSd4m984aA1RlxiK0ae7f7UG7s-qIyBXw&usqp=CAU";
-  const text = "Hello";
+  const text = "sue@newtoncommunityfarm.org";
   const url = "https://google.com";
   console.log(name, image, text, url);
 
@@ -51,27 +52,36 @@ function ExpertScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Agricultural Expert</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("ImageScreen")}>
-          <MaterialCommunityIcons
-            style={styles.icon}
-            name="close-circle"
-            size={50}
-          />
-        </TouchableOpacity>
+        <Text style={styles.title}>Agricultural Experts</Text>
       </View>
-      <View style={styles.buttonContainer}>
+      <View style={[styles.buttonContainer, { top: 50 }]}>
         <TouchableOpacity>
           <View style={styles.card}>
             <Text style={styles.resultTitle}>{name}</Text>
-            <Text style={styles.infoText} numberOfLines={10}>
+            <Text style={[styles.infoText, { top: 10 }]} numberOfLines={10}>
               {text}
             </Text>
-            <TouchableOpacity
-              style={styles.registerButton}
-              onPress={() => Linking.openURL(url)}
-            >
-              <Text style={styles.registerText}>Learn More</Text>
+            <TouchableOpacity style={styles.registerButton}>
+              <Text style={styles.registerText}>617-916-9655</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.registerButton, { bottom: 20 }]}>
+              <Text style={styles.registerText}>Email</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </View>
+      <View style={[styles.buttonContainer, { top: -20 }]}>
+        <TouchableOpacity>
+          <View style={styles.card}>
+            <Text style={styles.resultTitle}>Greg Maslowe</Text>
+            <Text style={[styles.infoText, { top: 10 }]} numberOfLines={10}>
+              NewtonCommunityFarm@comcast.net
+            </Text>
+            <TouchableOpacity style={styles.registerButton}>
+              <Text style={styles.registerText}>617-916-9655</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={[styles.registerButton, { bottom: 20 }]}>
+              <Text style={styles.registerText}>Email</Text>
             </TouchableOpacity>
           </View>
         </TouchableOpacity>
@@ -123,7 +133,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   registerButton: {
-    backgroundColor: "#EA765D",
+    backgroundColor: "#38C570",
     width: 271,
     height: 65,
     borderRadius: 7,

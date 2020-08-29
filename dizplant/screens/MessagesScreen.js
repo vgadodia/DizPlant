@@ -47,59 +47,59 @@ let finalMessages = [
     id: 1,
     image:
       "https://interactive.wttw.com/sites/default/files/Monuments_1_wide-shot_Hennessey.jpg",
-    link: "https://www.google.com/search?q=Bunker Hill Monument",
+    link: "https://www.google.com/search?q=niche",
     maps:
       "https://www.google.com/maps/search/?api=1&query=42.376340,-71.060774",
-    title: "Bunker Hill Monument",
+    title: "niche",
   },
   {
     description: "2.2 away",
     id: 2,
     image:
       "https://media-cdn.tripadvisor.com/media/photo-s/10/90/51/6e/soldiers-sailors-monument.jpg",
-    link: "https://www.google.com/search?q=Soldiers and Sailors Monument",
+    link: "https://www.google.com/search?q=Ricky's Flower Market",
     maps:
-      "https://www.google.com/maps/search/?api=1&query=42.355454,-71.066409",
-    title: "Soldiers and Sailors Monument",
+      "https://www.google.com/maps/search/?api=1&query=42.379282,-71.093768",
+    title: "Ricky's Flower Market",
   },
   {
     description: "2.4 mi away",
     id: 3,
     image:
       "https://upload.wikimedia.org/wikipedia/commons/6/66/Ether_Monument_Overview.JPG",
-    link: "https://www.google.com/search?q=Ether Monument",
+    link: "https://www.google.com/search?q=Mahoney's Garden Centers",
     maps:
-      "https://www.google.com/maps/search/?api=1&query=42.354822,-71.071422",
-    title: "Ether Monument",
+      "https://www.google.com/maps/search/?api=1&query=42.362418,-71.142117",
+    title: "Mahoney's Garden Centers",
   },
   {
     description: "3.3 mi away",
     id: 4,
     image: "https://live.staticflickr.com/7250/7658022350_6df0afd547_b.jpg",
-    link: "https://www.google.com/search?q=Boston Women's Memorial",
+    link: "https://www.google.com/search?q=Pemberton Farms Marketplace",
     maps:
-      "https://www.google.com/maps/search/?api=1&query=42.350478,-71.083356",
-    title: "Boston Women's Memorial",
+      "https://www.google.com/maps/search/?api=1&query=42.393820,-71.125703",
+    title: "Pemberton Farms Marketplace",
   },
   {
     description: "3.9 mi away",
     id: 5,
     image:
       "https://www.boston-discovery-guide.com/image-files/800-boston-massacre-memorial-common-5x4.jpg",
-    link: "https://www.google.com/search?q=Soldiers Memorial",
+    link: "https://www.google.com/search?q=Home And Garden Center",
     maps:
-      "https://www.google.com/maps/search/?api=1&query=42.309394,-71.115822",
-    title: "Soldiers Memorial",
+      "https://www.google.com/maps/search/?api=1&query=42.339053,-71.135045",
+    title: "Home And Garden Center",
   },
   {
     description: "4.5 mi away",
     id: 6,
     image:
       "https://t0.gstatic.com/images?q=tbn:ANd9GcT-IEWSlDw3kAu9NROnwF8wslo7pgYwu0iQ2eFuOArwRC5p4oB8mESdMzayW4IltyaSNkOyelwhAI4IhQ",
-    link: "https://www.google.com/search?q=Old State House",
+    link: "https://www.google.com/search?q=Boston Gardener",
     maps:
       "https://www.google.com/maps/search/?api=1&query=42.358729,-71.057460",
-    title: "Old State House",
+    title: "Boston Gardener",
   },
 ];
 
@@ -131,20 +131,17 @@ function MessagesScreen(props) {
     const { latitude, longitude } = await getLocation();
     console.log(latitude, longitude);
     try {
-      let response = await fetch(
-        "https://landmarkapp-backend.herokuapp.com/maps",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            lat: latitude,
-            lon: longitude,
-          }),
-        }
-      );
+      let response = await fetch("http://00c455fcd820.ngrok.io/maps", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          lat: latitude,
+          lon: longitude,
+        }),
+      });
       let json = await response.json();
       let arr = [];
       arr.push(json["first"]);
@@ -170,10 +167,7 @@ function MessagesScreen(props) {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Explore</Text>
       </View>
-      <TouchableOpacity
-        style={styles.registerButton}
-        onPress={getResult}
-      >
+      <TouchableOpacity style={styles.registerButton} onPress={getResult}>
         <Text style={styles.registerText}>Get Nearby Landmarks</Text>
       </TouchableOpacity>
       <View style={styles.listings}>
@@ -224,7 +218,7 @@ const styles = StyleSheet.create({
     textAlignVertical: "center",
   },
   registerButton: {
-    backgroundColor: "#EA765D",
+    backgroundColor: "#38C570",
     width: 270,
     height: 65,
     borderRadius: 7,

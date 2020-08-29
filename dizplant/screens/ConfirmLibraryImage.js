@@ -37,81 +37,40 @@ function ConfirmLibraryImage({ route, navigation }) {
     const prediction = "Taj Mahal";
     console.log("Starting prediction...");
 
-    let name = "";
+    // let name = "Healthy Blueberry";
+    // let image =
+    //   "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQrC0mGkvj0Y6TVRHi8MHyuuD7cqpTGUkHRdg&usqp=CAU";
+    // let text =
+    //   "Blueberries are perennial flowering plants with blue or purple berries. They are classified in the section Cyanococcus within the genus Vaccinium. Vaccinium also includes cranberries, bilberries, huckleberries and Madeira blueberries.Commercial blueberries—both wild (lowbush) and cultivated (highbush)—are all native to North America. The highbush varieties were introduced into Europe during the 1930s. Blueberries are usually prostrate shrubs that can vary in size from 10 centimeters (4 inches) to 4 meters (13 feet) in height. In commercial production of blueberries, the species with small, pea-size berries growing on low-level bushes are known as 'lowbush blueberries' (synonymous with 'wild'), while the species with larger berries growing on taller cultivated bushes are known as 'highbush blueberries'. Canada is the leading producer of lowbush blueberries, while the United States produces some 40% of the world supply of highbush blueberries.";
+    // let url = "https://en.wikipedia.org/wiki/Blueberry";
+
+    // navigation.navigate("ResultsScreen", {
+    //   name,
+    //   image,
+    //   text,
+    //   url,
+    // });
 
     try {
-      let googleVisionRes = await fetch(
-        "https://vision.googleapis.com/v1/images:annotate?key=" +
-          "ENTER GOOGLE CLOUD API KEY",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            requests: [
-              {
-                image: {
-                  content: base64,
-                },
-                features: [{ type: "LANDMARK_DETECTION", maxResults: 5 }],
-              },
-            ],
-          }),
-        }
-      );
-      let json = await googleVisionRes.json();
-      try {
-        name = json["responses"][0]["landmarkAnnotations"][0]["description"];
-      } catch (error) {
-        navigation.navigate("ResultsScreen", {
-          name: "No Data Available",
-          image:
-            "https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80",
-          text: "No information available",
-          url: "https://google.com",
-        });
-        return;
-      }
-    } catch (error) {
-      navigation.navigate("ResultsScreen", {
-        name: "No Data Available",
-        image:
-          "https://images.unsplash.com/photo-1516738901171-8eb4fc13bd20?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80",
-        text: "No information available",
-        url: "https://google.com",
+      let response = await fetch("http://00c455fcd820.ngrok.io/predict", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          input: base64,
+        }),
       });
-      return;
-    }
-
-    console.log(name);
-
-    try {
-      let response = await fetch(
-        "https://landmarkapp-backend.herokuapp.com/monuments",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: name,
-          }),
-        }
-      );
       let json = await response.json();
       console.log(json);
-      let { image, text, url } = json;
-      if (name === "Taj Mahal") {
-        image =
-          "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80";
-      }
-      if (json["url"]) {
-        navigation.navigate("ResultsScreen", {
-          name,
-          image,
-          text,
-          url,
-        });
-      }
+      let { disease, plant, name, image, text, url } = json;
+      navigation.navigate("ResultsScreen", {
+        name,
+        image,
+        text,
+        url,
+      });
     } catch (error) {
       console.error(error);
     }

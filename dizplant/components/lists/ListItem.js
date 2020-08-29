@@ -28,7 +28,11 @@ function ListItem({
         {IconComponent}
         {/* {image && <Image style={styles.image} source={{ uri: image }} />} */}
         <View style={styles.image}>
-        <MaterialCommunityIcons name="map-marker-radius" color={"white"} size={50}  />
+          <MaterialCommunityIcons
+            name="map-marker-radius"
+            color={"white"}
+            size={40}
+          />
         </View>
         <View style={styles.detailsContainer}>
           <Text style={styles.title} numberOfLines={1}>
@@ -61,7 +65,7 @@ function ListItem({
 
 const styles = StyleSheet.create({
   learnMore: {
-    backgroundColor: "#EA765D",
+    backgroundColor: "#38C570",
     justifyContent: "center",
     alignItems: "center",
     top: 10,
@@ -103,12 +107,12 @@ const styles = StyleSheet.create({
     left: 10,
   },
   image: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     borderRadius: 35,
-    backgroundColor: '#4D8AF0',
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: "#4D8AF0",
+    justifyContent: "center",
+    alignItems: "center",
     left: 5,
   },
 

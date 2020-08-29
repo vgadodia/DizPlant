@@ -41,20 +41,17 @@ function RegisterScreen({ navigation }) {
     // auth.logIn(result.data);
     // console.log(email, password);
     try {
-      let response = await fetch(
-        "https://landmarkapp-backend.herokuapp.com/register",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        }
-      );
+      let response = await fetch("http://00c455fcd820.ngrok.io/register", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      });
       let json = await response.json();
       if (json["status"] === "success") {
         console.log("Registration Successful");
